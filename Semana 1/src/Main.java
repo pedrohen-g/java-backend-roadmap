@@ -1,20 +1,22 @@
 public class Main {
     public static void main(String[] args){
-        Produto camisaBrasilAzul = new Produto("Camisa Brasil Azul", 189.99, 1);
-        Produto camisaBrasilAmarela = new Produto("Camisa Brasil Amarela", 189.99, 2);
-        Produto camisaArgentina = new Produto("Camisa Argentina", 189.99, 1);
+        Produto produtoValido = new Produto("Camisa Brasil Azul", 189.99, 2);
+        produtoValido.exibirInformacoes();
 
-        camisaArgentina.exibirInformacoes();
-        camisaBrasilAmarela.exibirInformacoes();
-        camisaBrasilAzul.exibirInformacoes();
+        produtoValido.removerEstoque(2);
+        produtoValido.exibirInformacoes();
 
-        camisaBrasilAzul.adicionarEstoque(3);
-        camisaBrasilAmarela.removerEstoque(2);
-        camisaArgentina.adicionarEstoque(25);
+        produtoValido.adicionarEstoque(5);
+        produtoValido.exibirInformacoes();
 
-        camisaArgentina.exibirInformacoes();
-        camisaBrasilAmarela.exibirInformacoes();
-        camisaBrasilAzul.exibirInformacoes();
+        Produto produtoInvalido = new Produto("", -10, -3);
+        produtoInvalido.exibirInformacoes();
 
+        produtoValido.setPreco(0);
+        produtoValido.setNome("   ");
+        produtoValido.setQuantidade(-5);
+        produtoValido.adicionarEstoque(-2);
+        produtoValido.removerEstoque(999);
+        produtoValido.exibirInformacoes();
     }
 }

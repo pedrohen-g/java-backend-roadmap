@@ -41,5 +41,16 @@ public class Main {
 
         System.out.println("===== LISTA FINAL DO ESTOQUE =====");
         estoque.listarProdutos();
+
+        Calculavel itemCalculavel = camisaBrasilAzul;
+
+        System.out.println("===== TESTE COM INTERFACE CALCULAVEL =====");
+        System.out.println("Valor Calculado pela Interface: R$ " + itemCalculavel.calcularValorTotal());
+
+        GerenciadorEstoque gerenciador = estoque;
+
+        System.out.println("===== TESTE COM INTERFACE GERENCIADOR ESTOQUE =====");
+        gerenciador.listarProdutos();
+
     }
 }

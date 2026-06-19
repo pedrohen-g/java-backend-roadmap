@@ -1,4 +1,4 @@
-public class Produto {
+public class Produto implements Calculavel {
     private String nome = "Produto sem nome";
     private double preco = 1.0;
     private int quantidade = 0;
@@ -9,6 +9,7 @@ public class Produto {
         setQuantidade(quantidade);
     }
 
+    @Override
     public double calcularValorTotal(){
         return getPreco() * getQuantidade();
     }

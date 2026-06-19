@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class EstoqueService {
+public class EstoqueService implements GerenciadorEstoque {
 
     private ArrayList<Produto> produtos;
 
@@ -8,6 +8,7 @@ public class EstoqueService {
         this.produtos = new ArrayList<>();
     }
 
+    @Override
     public void adicionarProduto(Produto produto){
         if(produto == null ){
             System.out.println("Produto Inválido!\n");
@@ -18,6 +19,7 @@ public class EstoqueService {
         System.out.println("Produto adicionado com sucesso!\n");
     }
 
+    @Override
     public void listarProdutos(){
         if(produtos.isEmpty()){
             System.out.println("Estoque está vazio!\n");
@@ -29,6 +31,7 @@ public class EstoqueService {
 
     }
 
+    @Override
     public Produto buscarProdutoPorNome(String nome){
         if(nome == null || nome.trim().isEmpty()){
             System.out.println("Nome inválido!\n");
@@ -44,6 +47,7 @@ public class EstoqueService {
         return null;
     }
 
+    @Override
     public void removerProdutoPorNome(String nome){
 
         Produto produtoEncontrado = buscarProdutoPorNome(nome);

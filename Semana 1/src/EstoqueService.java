@@ -34,8 +34,7 @@ public class EstoqueService implements GerenciadorEstoque {
     @Override
     public Produto buscarProdutoPorNome(String nome){
         if(nome == null || nome.trim().isEmpty()){
-            System.out.println("Nome inválido!\n");
-            return null;
+            throw new ProdutoInvalidoException("Nome do produto invalido!");
         }
 
         for (Produto produto : produtos){
@@ -44,18 +43,13 @@ public class EstoqueService implements GerenciadorEstoque {
             }
         }
 
-        return null;
+        throw new ProdutoNaoEncontradoException("Produto não encontrado no estoque!");
     }
 
     @Override
     public void removerProdutoPorNome(String nome){
 
         Produto produtoEncontrado = buscarProdutoPorNome(nome);
-
-        if(produtoEncontrado == null){
-            System.out.println("Produto não encontrado para remoção!\n");
-            return;
-        }
 
         produtos.remove(produtoEncontrado);
         System.out.println("Produto removido com sucesso!\n");

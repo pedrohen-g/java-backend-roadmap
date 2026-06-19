@@ -32,27 +32,25 @@ public class Produto implements Calculavel {
     }
 
     public void adicionarEstoque(int quantidadeAdicionada){
-        if(quantidadeAdicionada > 0){
-            int quantidade = getQuantidade();
-            quantidade += quantidadeAdicionada;
-            setQuantidade(quantidade);
-        }else{
-            System.out.println("Quantidade invalida!\n");
-            return;
+        if(quantidadeAdicionada <= 0){
+            throw new ProdutoInvalidoException("Quantidade adicionada deve ser maior que zero!");
         }
+        int quantidade = getQuantidade();
+        quantidade += quantidadeAdicionada;
+        setQuantidade(quantidade);
 
     }
 
     public void removerEstoque(int quantidadeRemovida){
-        if(quantidadeRemovida <= getQuantidade() && quantidadeRemovida > 0){
-            int quantidade = getQuantidade();
-            quantidade -= quantidadeRemovida;
-            setQuantidade(quantidade);
-        }else{
-            System.out.println("Quantidade invalida!\n");
-            return;
+        if(quantidadeRemovida <= 0){
+            throw new ProdutoInvalidoException("Quantidade removida deve ser maior que zero!");
         }
-
+        if (quantidadeRemovida > getQuantidade()){
+            throw new ProdutoInvalidoException("Estoque insuficiente para remoção!");
+        }
+        int quantidade = getQuantidade();
+        quantidade -= quantidadeRemovida;
+        setQuantidade(quantidade);
     }
 
     public String getNome() {
@@ -61,11 +59,10 @@ public class Produto implements Calculavel {
 
     public void setNome(String nome) {
         if(nome == null || nome.trim().isEmpty()){
-            System.out.println("Nome inválido!\n");
-            return;
-        }else{
-            this.nome = nome.trim();
+            throw new ProdutoInvalidoException("Nome do produto não pode ser vazio!");
         }
+
+        this.nome = nome.trim();
     }
 
     public double getPreco() {
@@ -74,11 +71,10 @@ public class Produto implements Calculavel {
 
     public void setPreco(double preco) {
         if(preco <= 0){
-            System.out.println("Preço inválido!\n");
-            return;
-        }else{
-            this.preco = preco;
+            throw new ProdutoInvalidoException("Preço deve ser maior que zero!");
         }
+
+        this.preco = preco;
     }
 
     public int getQuantidade() {
@@ -87,10 +83,8 @@ public class Produto implements Calculavel {
 
     public void setQuantidade(int quantidade) {
         if(quantidade < 0){
-            System.out.println("Quantidade inválida!\n");
-            return;
-        }else{
-            this.quantidade = quantidade;
+            throw new ProdutoInvalidoException("Quantidade não pode ser negativa!");
         }
+        this.quantidade = quantidade;
     }
 }

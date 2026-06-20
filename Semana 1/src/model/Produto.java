@@ -1,12 +1,21 @@
+package model;
+
+import contract.Calculavel;
+import exception.ProdutoInvalidoException;
+
 public class Produto implements Calculavel {
     private String nome = "Produto sem nome";
     private double preco = 1.0;
     private int quantidade = 0;
+    private int id;
+    private String categoria;
 
-    public Produto(String nome, double preco, int quantidade) {
+    public Produto(int id, String nome, String categoria, double preco, int quantidade) {
         setNome(nome);
         setPreco(preco);
         setQuantidade(quantidade);
+        setId(id);
+        setCategoria(categoria);
     }
 
     @Override
@@ -19,7 +28,9 @@ public class Produto implements Calculavel {
     }
 
     public void exibirInformacoes(){
+        System.out.println("ID: " + getId());
         System.out.println("Nome do produto: " + getNome());
+        System.out.println("Categoria: " + getCategoria());
         System.out.println("Preço: " + getPreco());
         System.out.println("Quantidade: " + getQuantidade());
         System.out.println("Valor Total em Estoque: " + calcularValorTotal());
@@ -87,4 +98,27 @@ public class Produto implements Calculavel {
         }
         this.quantidade = quantidade;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        if(id <= 0){
+            throw new ProdutoInvalidoException("ID deve ser maior que zero!");
+        }
+        this.id = id;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        if(categoria == null || categoria.trim().isEmpty()){
+            throw new ProdutoInvalidoException("Categoria do produto não pode ser vazia!");
+        }
+        this.categoria = categoria.trim();
+    }
+
 }
